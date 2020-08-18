@@ -23,22 +23,12 @@ mongoose.connect(process.env.MONGODB_URI || 'mongodb://localhost:27017/mernauth'
 mongoose.connection.on('connected', ()=>{
   log('Mongoose is connected');
 });
-// if (process.env.NODE_ENV === 'production') {
-//   app.use(express.static(path.join(__dirname, 'client/build')));
-//   }
+
+
+////FINALLY CORRECT
 if (process.env.NODE_ENV === 'production') {
   app.use(express.static(path.join(__dirname, '/client/build')));
   }
-
-
-
-  // if (process.env.NODE_ENV === 'production') {
-  //   app.use(express.static(path.join(__dirname, 'client/build')));
-  
-  //   // app.get('/', (req, res) => {
-  //   //   res.sendFile(path.join(__dirname, 'client/build/index.html'));
-  //   // });
-  // }
 
 app.use(logger('dev'));
 app.use(express.json());
@@ -63,6 +53,7 @@ app.use('/members', membersRouter);
 //   });
 //   }
 
+////FINALLY CORRECT
 if (process.env.NODE_ENV === 'production') {
   app.get('*', function(req,res){
       res.sendFile(path.join(__dirname + '/client/build/index.html'));
