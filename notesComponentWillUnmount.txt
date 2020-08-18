@@ -1,0 +1,67 @@
+https://www.freecodecamp.org/news/how-to-work-with-react-the-right-way-to-avoid-some-common-pitfalls-fc9eb5e34d9e/
+
+import React from 'react'
+import ReactDOM from 'react-dom'
+import axios from 'axios'
+
+class RandomUser extends React.Component {
+  state = {user: null}
+  _isMounted = false
+  handleButtonClick = async () => {
+    const response = await axios.get('https://randomuser.me/api/')
+    if (this._isMounted) {
+      this.setState({ user: response.data })
+    }
+  }
+  componentDidMount() {
+    this._isMounted = true
+  }
+  componentWillUnmount() {
+    this._isMounted = false
+  }
+  render() {
+    return (
+      <div>
+        <button onClick={this.handleButtonClick}>Click Me</button>
+        <pre>{JSON.stringify(this.state.user, null, 2)}</pre>
+      </div>
+    )
+  }
+}
+
+
+
+============
+
+
+
+import React, { Component, Fragment } from "react";
+import ReactDOM from "react-dom";
+
+import BadCounter from "./counter";
+// Styles
+import "./styles.css";
+
+class App extends Component {
+  state = { showCounter: true };
+  componentDidMount() {
+    this.interval = setTimeout(() => {
+      this.setState(state => ({ showCounter: !state.showCounter }));
+    }, 5000);
+  }
+  componentWillUnmount() {
+    clearTimeout(this.interval);
+  }
+  render() {
+    const { showCounter } = this.state;
+    return (
+      <div className="app">
+        <h1>Good Subscriptions</h1>
+        {showCounter ? <BadCounter /> : null}
+      </div>
+    );
+  }
+}
+
+const rootElement = document.getElementById("root");
+ReactDOM.render(<App />, rootElement);
