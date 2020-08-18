@@ -27,7 +27,7 @@ passport.serializeUser(function(user, done) {
     User.findOne({email: email})
         .then((user)=>{
             console.log("DESERIALIZED USER: ", user);
-            user.isAuthenticated = true;
+            // user.isAuthenticated = true;
             done(null, user)
         })
         .catch((error)=>{

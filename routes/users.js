@@ -35,7 +35,7 @@ router.post('/signup', async (req, res, next)=>{
         return res.status(500).json(error);
       }
 
-      user.isAuthenticated = true;
+      // user.isAuthenticated = true;
 
       console.log("FROM COOKIE SESSION: ", user);
       // if(req.user){
